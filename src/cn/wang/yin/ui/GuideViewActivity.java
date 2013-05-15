@@ -17,6 +17,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import cn.wang.yin.personal.R;
+import cn.wang.yin.utils.PersonConstant;
+import cn.wang.yin.utils.PersonDbUtils;
 
 public class GuideViewActivity extends Activity {
 	private ImageView mImageView;
@@ -51,8 +53,7 @@ public class GuideViewActivity extends Activity {
 			mImageView = new ImageView(GuideViewActivity.this);
 			mImageView.setLayoutParams(new LayoutParams(20, 20));
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-					LayoutParams.WRAP_CONTENT,
-					LayoutParams.WRAP_CONTENT);
+					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			lp.setMargins(20, 0, 20, 20);
 			mImageView.setLayoutParams(lp);
 
@@ -108,7 +109,7 @@ public class GuideViewActivity extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		//EtongDbUtils.putValue(EtongConstant.USER_FIRST_OPEN, true, null);
+		PersonDbUtils.putValue(PersonConstant.USER_FIRST_OPEN, true, null);
 		super.onDestroy();
 	}
 

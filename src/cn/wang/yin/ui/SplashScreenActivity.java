@@ -34,9 +34,9 @@ public class SplashScreenActivity extends Activity {
 					@Override
 					public void run() {
 						Intent mainIntent = new Intent(
-								SplashScreenActivity.this, Location.class);
+								SplashScreenActivity.this, FragmentMain.class);
 						SplashScreenActivity.this.startActivity(mainIntent);
-						Location.launch(SplashScreenActivity.this);
+						FragmentMain.launch(SplashScreenActivity.this);
 						SplashScreenActivity.this.finish();
 
 					}

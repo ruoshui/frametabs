@@ -65,11 +65,13 @@ public class CompassActivity extends Activity {
 	View mViewGuide;
 	ImageView mGuideAnimation;
 	protected Handler invisiableHandler = new Handler() {
+		@Override
 		public void handleMessage(Message msg) {
 			mViewGuide.setVisibility(View.GONE);
 		}
 	};
 
+	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
 		AnimationDrawable anim = (AnimationDrawable) mGuideAnimation
 				.getDrawable();
@@ -401,7 +403,7 @@ public class CompassActivity extends Activity {
 
 		@Override
 		public void onSensorChanged(SensorEvent event) {
-			float direction = event.values[mSensorManager.DATA_X] * -1.0f;
+			float direction = event.values[SensorManager.DATA_X] * -1.0f;
 			mTargetDirection = normalizeDegree(direction);// 赋值给全局变量，让指南针旋转
 			// Log.i("way", event.values[mSensorManager.DATA_Y] + "");
 		}

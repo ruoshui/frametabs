@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -13,9 +12,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,7 +31,7 @@ import com.caucho.hessian.client.HessianProxyFactory;
 import com.wang.yin.hessian.bean.Express;
 import com.wang.yin.hessian.bean.ExpressData;
 
-public class express extends Activity {
+public class FragmentExpress extends Fragment {
 	EditText editText1;
 	Button button1;
 	String num = "";
@@ -40,39 +41,50 @@ public class express extends Activity {
 	public static final int FAIL = 102;
 	List<String> all = new ArrayList();
 
+	public FragmentExpress() {
+
+	}
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.express);
-		editText1 = (EditText) findViewById(R.id.editText1);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		if (container == null) {
+			return null;
+		}
+
+		LayoutInflater myInflater = (LayoutInflater) getActivity()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View layout = myInflater.inflate(R.layout.express, container, false);
+
+		// layout.setContentView(R.layout.express);
+		editText1 = (EditText) layout.findViewById(R.id.editText1);
 		editText1.setText("5045205409800");
-		button1 = (Button) findViewById(R.id.button1);
-		express_list = (LinearLayout) findViewById(R.id.express_list);
-		
-		p_dialog=new ProgressDialog(getApplicationContext());
-		p_dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		button1 = (Button) layout.findViewById(R.id.button1);
+		express_list = (LinearLayout) layout.findViewById(R.id.express_list);
+		p_dialog = new ProgressDialog(getActivity());
+		p_dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		p_dialog.setMessage("载入中……");
 		p_dialog.setTitle("请等待");
+
 		button1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				String express_num = editText1.getText().toString();
 				if (StringUtils.isNotBlank(express_num)) {
 					num = express_num;
-					//p_dialog.show();
-					//p_dialog =ProgressDialog.show(express.this, "teee", "载入中……",true);
-					Thread t = new Thread(submitRunnnable);
-					t.run();
-					
+					p_dialog.show();
+					new Thread(submitRunnnable).start();
 				}
 			}
 		});
+
+		return layout;
 	}
 
 	public void fresh(List<ExpressData> datas) {
-
-		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
+		LayoutInflater inflater = (LayoutInflater) getActivity()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		express_list.removeAllViews();
 		for (ExpressData bean : datas) {
 			View child = inflater.inflate(R.layout.express_sinagle, null);
@@ -85,6 +97,12 @@ public class express extends Activity {
 			express_list.addView(child);
 		}
 
+	}
+
+	@Override
+	public void onPause() {
+
+		super.onPause();
 	}
 
 	Handler hand = new Handler() {
@@ -102,9 +120,9 @@ public class express extends Activity {
 			}
 				break;
 			case FAIL: {
-				AlertDialog dialog = new AlertDialog.Builder(express.this)
+				AlertDialog dialog = new AlertDialog.Builder(getActivity())
 						.setTitle("提示")
-						.setMessage("需要网络，您的手机当前网络不可用，请设置您的网络")
+						.setMessage("超时！请重试！")
 						.setPositiveButton("确定",
 								new DialogInterface.OnClickListener() {
 									@Override
@@ -151,13 +169,12 @@ public class express extends Activity {
 			}
 			hand.sendMessage(msg);
 		}
-		
+
 	};
-	
+
 	Runnable scanrunnable = new Runnable() {
 		@Override
 		public void run() {
 		}
 	};
-
 }

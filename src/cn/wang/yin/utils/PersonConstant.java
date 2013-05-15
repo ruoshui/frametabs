@@ -88,5 +88,8 @@ public class PersonConstant {
 	public static final int LOCATION_CHANGE = 23;
 	public static final String USER_FIRST_OPEN = "user_agent_info_first_open_cn.wang.yin";
 	public static final int ETONG_RESULTCODE_INDEX = 110;
+	
+	
+	
 
 }

@@ -41,6 +41,8 @@ public class HandlerService extends IntentService {
 	PendingIntent m_PendingIntent;
 	Notification m_Notification;
 
+	private static boolean running;
+
 	public HandlerService() {
 
 		super("HandlerService");
@@ -53,16 +55,16 @@ public class HandlerService extends IntentService {
 	@Override
 	public void onCreate() {
 		// addNotificaction();
-		mLocationClient = new LocationClient(getApplicationContext()); // 声明LocationClient类
-		mLocationClient.registerLocationListener(myListener); // 注册监听函数
+		mLocationClient = new LocationClient(getApplicationContext());
+		mLocationClient.registerLocationListener(myListener);
 		LocationClientOption option = new LocationClientOption();
 		option.setOpenGps(true);
-		option.setAddrType("all");// 返回的定位结果包含地址信息
-		option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度,默认值gcj02
+		option.setAddrType("all");
+		option.setCoorType("bd09ll");
 		option.setProdName("wangyin");
 		option.setPriority(LocationClientOption.GpsFirst);
-		option.setScanSpan((int) PersonConstant.WAIT_TIMS);// 设置发起定位请求的间隔时间为5000ms
-		option.disableCache(true);// 禁止启用缓存定位
+		option.setScanSpan((int) PersonConstant.WAIT_TIMS);
+		option.disableCache(true);
 		mLocationClient.setLocOption(option);
 		mLocationClient.start();
 		PersonDbUtils.setPreference(getSharedPreferences(
@@ -76,33 +78,28 @@ public class HandlerService extends IntentService {
 				tm,
 				getSharedPreferences(PersonConstant.USER_AGENT_INFO,
 						Context.MODE_PRIVATE));
-
+		start();
 		super.onCreate();
 	}
 
 	/**
-	 * 添加一个notification
+	 * 娣诲姞涓�釜notification
 	 */
 	private void addNotificaction() {
 
 		m_NotificationManager = (NotificationManager) this
 				.getSystemService(Context.NOTIFICATION_SERVICE);
-		// 创建一个Notification
 		Notification m_Notification = new Notification();
-		// 设置显示在手机最上边的状态栏的图标
 		m_Notification.icon = R.drawable.ic_launcher;
-		// 当当前的notification被放到状态栏上的时候，提示内容
 		m_Notification.tickerText = PersonConstant.MSEESGE_REMIND_TICKER;
 		m_Notification.flags |= Notification.FLAG_ONGOING_EVENT;
 		m_Notification.flags |= Notification.FLAG_AUTO_CANCEL;
-		// m_Notification.flags |= Notification.FLAG_NO_CLEAR;
-		// 添加声音提示
 		m_Notification.defaults = Notification.DEFAULT_SOUND;
 		m_Notification.audioStreamType = android.media.AudioManager.ADJUST_LOWER;
 		Intent intent = new Intent(this, LocationMainActivity.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
 				intent, PendingIntent.FLAG_ONE_SHOT);
-		m_Notification.setLatestEventInfo(this, "王隐",
+		m_Notification.setLatestEventInfo(this, "鐜嬮殣",
 				PersonConstant.MSEESGE_REMIND_CONTENT, pendingIntent);
 		m_NotificationManager.notify(PersonConstant.COMMON_NOTIFICATION,
 				m_Notification);
@@ -141,17 +138,9 @@ public class HandlerService extends IntentService {
 		public void handleMessage(Message msg) {
 			Message message = new Message();
 			message.what = 5;
-			// /定时执行任务
 			// ////////////////////////////////////////////////////////////////
 			switch (msg.what) {
 			case 1:
-				// if (mLocationClient != null && mLocationClient.isStarted()) {
-				// mLocationClient.requestLocation();
-				//
-				// message.obj = "定位";
-				// } else {
-				// message.obj = "有异常\t" + mLocationClient;
-				// }
 				break;
 			case 2:
 				if (msg.obj != null) {
@@ -166,7 +155,7 @@ public class HandlerService extends IntentService {
 						.getLatitude()
 						|| CollectGpsUtil.getLon() == CollectGpsUtil.location
 								.getLongitude()) {
-					Log.e("change", "变化");
+					Log.e("change", "改变");
 					Intent intent = new Intent("cn.wang.yin.ui.Location");
 					intent.putExtra(PersonConstant.LOCATION_CHANGE_TAG,
 							PersonConstant.LOCATION_CHANGE);
@@ -215,13 +204,13 @@ public class HandlerService extends IntentService {
 			sb.append(location.getLatitude());
 			sb.append("\nlontitude : ");
 			sb.append(location.getLongitude());
-			
-			LocationData locData =new LocationData();
+
+			LocationData locData = new LocationData();
 			locData.latitude = location.getLatitude();
-	        locData.longitude = location.getLongitude();
-	        locData.accuracy = location.getRadius();
-	        locData.direction = location.getDerect();
-	        PersonIntence.setLocData(locData);
+			locData.longitude = location.getLongitude();
+			locData.accuracy = location.getRadius();
+			locData.direction = location.getDerect();
+			PersonIntence.setLocData(locData);
 			sb.append("\nradius : ");
 			sb.append(location.getRadius());
 			if (location.getLocType() == BDLocation.TypeGpsLocation) {
@@ -252,6 +241,18 @@ public class HandlerService extends IntentService {
 				return;
 			}
 		}
+	}
+
+	public static boolean isRunning() {
+		return running;
+	}
+
+	public static void stop() {
+		HandlerService.running = false;
+	}
+
+	public static void start() {
+		HandlerService.running = true;
 	}
 
 }

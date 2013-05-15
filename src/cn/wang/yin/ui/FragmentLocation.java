@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -14,13 +13,15 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import cn.wang.yin.personal.R;
 import cn.wang.yin.personal.service.HandlerService;
 import cn.wang.yin.utils.PersonConstant;
-import cn.wang.yin.utils.PersonDbUtils;
 import cn.wang.yin.utils.PersonIntence;
 
 import com.baidu.mapapi.BMapManager;
@@ -33,7 +34,8 @@ import com.baidu.mapapi.map.OverlayItem;
 import com.baidu.mapapi.map.PopupOverlay;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 
-public class Location extends Activity {
+public class FragmentLocation extends Fragment {
+
 	View mPopView = null;
 	TextView pop_text;
 	BMapManager mBMapMan = null;
@@ -48,18 +50,41 @@ public class Location extends Activity {
 	MyLocationOverlay myLocationOverlay = null;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 
 		// PersonDbUtils.init(
 		// getApplicationContext(),
 		// getSharedPreferences(PersonConstant.USER_AGENT_INFO,
 		// Context.MODE_PRIVATE));
 		super.onCreate(savedInstanceState);
-		mBMapMan = new BMapManager(getApplication());
+
+		// push("开始启动服务");
+		// savedInstanceState.startService(new Intent(getApplicationContext(),
+		// HandlerService.class));
+		// Field[] fields = Build.class.getDeclaredFields();
+		// System.out.println(15 / 0);
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		if (container == null) {
+			return null;
+		}
+		LayoutInflater myInflater = (LayoutInflater) getActivity()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View layout = myInflater.inflate(R.layout.location, container, false);
+		mBMapMan = new BMapManager(getActivity().getApplicationContext());
 		mBMapMan.init(PersonConstant.BAIDU_MAP_KEY, null);
-		setContentView(R.layout.location);
-		System.out.println("map");
-		mMapView = (MapView) findViewById(R.id.sinagle_taavel_map_view);
+		// layout.setContentView(R.layout.location);
+		mMapView = (MapView) layout.findViewById(R.id.sinagle_taavel_map_view);
 		mMapView.setBuiltInZoomControls(false);
 		// 设置启用内置的缩放控件
 		mMapController = mMapView.getController();
@@ -74,10 +99,14 @@ public class Location extends Activity {
 		mMapView.getOverlays().add(myLocationOverlay);
 		myLocationOverlay.enableCompass();
 		mMapView.refresh();// 刷新地图
-		// push("开始启动服务");
-		startService(new Intent(getApplicationContext(), HandlerService.class));
-		// Field[] fields = Build.class.getDeclaredFields();
-		// System.out.println(15 / 0);
+		if (!HandlerService.isRunning()) {
+			getActivity().startService(
+					new Intent(getActivity().getApplicationContext(),
+							HandlerService.class));
+		}
+
+		return layout;
+
 	}
 
 	Handler handler = new Handler() {
@@ -101,24 +130,6 @@ public class Location extends Activity {
 			if (PersonConstant.LOCATION_CHANGE == intExtra) {
 				myLocationOverlay.setData(PersonIntence.getLocData());
 				mMapView.refresh();
-				// mMapView.getOverlays().clear();
-				// // mMapView.removeAllViews();
-				// Log.i("onReceive", "刷新地图");
-				// OverItemS ov = new OverItemS(getResources().getDrawable(
-				// R.drawable.gplaces), mMapView);
-				// mMapView.getOverlays().add(ov);
-				//
-				// Drawable endmarker = getResources().getDrawable(
-				// R.drawable.gplaces);
-				// OverlayItem enditem = new
-				// OverlayItem(PersonIntence.getPoint(),
-				// "item3", PersonIntence.getAddr());
-				// enditem.setMarker(endmarker);
-				// ov.addItem(enditem);
-				// mMapController.setCenter(PersonIntence.getPoint());//
-				// mMapController.setZoom(19);// 设置地图zoom级别
-				// mMapView.refresh();// 刷新地图
-
 			}
 		}
 	}
@@ -155,42 +166,18 @@ public class Location extends Activity {
 	}
 
 	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-	}
-
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		unregisterReceiver(receiver);
-		super.onPause();
-	}
-
-	@Override
-	protected void onRestart() {
-		// TODO Auto-generated method stub
-		super.onRestart();
-	}
-
-	@Override
-	protected void onResume() {
+	public void onResume() {
 		receiver = new TabChangeReceiver();
-		registerReceiver(receiver, new IntentFilter("cn.wang.yin.ui.Location"),
-				null, handler);
+		getActivity().registerReceiver(receiver,
+				new IntentFilter("cn.wang.yin.ui.FragmentLocation"), null,
+				handler);
 		super.onResume();
-
 	}
 
 	@Override
-	protected void onStart() {
-		super.onStart();
-	}
-
-	@Override
-	protected void onStop() {
+	public void unregisterForContextMenu(View view) {
 		// TODO Auto-generated method stub
-		super.onStop();
+		super.unregisterForContextMenu(view);
 	}
 
 	public static void launch(Context c) {
@@ -198,4 +185,5 @@ public class Location extends Activity {
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		c.startActivity(intent);
 	}
+
 }
