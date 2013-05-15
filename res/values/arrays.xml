@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="flight_operator">
+        <item>分享到新浪微博</item>
+        <item>分享到腾讯微博</item>
+        <item>分享到QQ空间</item>
+    </string-array>
+    <string-array name="flight_operator2">
+        <item>分享到新浪微博</item>
+        <item>分享到腾讯微博</item>
+        <item>分享到QQ空间</item>
+        <item>分享到微信</item>
+        <item>分享到微信好友圈</item>
+        <item>分享到好友短信</item>
+        <item>其他</item>
+    </string-array>
+    <string-array name="certificate_type_operator">
+        <item>身份证</item>
+        <item>军官证</item>
+        <item>护照</item>
+        <item>港澳通行证</item>
+        <item>台湾通行证</item>
+    </string-array>
+    <string-array name="attention_type_operator">
+        <item>接机人</item>
+        <item>送机人</item>
+        <item>乘机人</item>
+    </string-array>
+    <string-array name="card_authentication_operator">
+        <item>拍摄证件信息</item>
+        <item>选取证件信息</item>
+    </string-array>
+    <string-array name="my_attention_operator">
+        <item>打 开</item>
+        <item>删 除</item>
+    </string-array>
+    <string-array name="twitter_share">
+        <item>分享到新浪微博</item>
+        <item>分享到腾讯微博</item>
+        <item>分享到QQ空间</item>
+    </string-array>
+    <string-array name="twitter_share2">
+        <item>分享到新浪微博</item>
+        <item>分享到腾讯微博</item>
+        <item>分享到微信</item>
+        <item>分享到微信朋友圈</item>
+        <item>短信分享</item>
+        <item>其他</item>
+    </string-array>
+
+    <declare-styleable name="PullScrollView">
+        <attr name="show_refresh" format="boolean" />
+        <attr name="refresh_pull" format="boolean" />
+        <attr name="head_tip" format="string" />
+    </declare-styleable>
+
+</resources>

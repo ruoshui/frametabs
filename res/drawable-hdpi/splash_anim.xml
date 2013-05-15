@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/splash_pro"
+    android:oneshot="true" >
+
+    <item
+        android:drawable="@drawable/roll_point0"
+        android:duration="250"/>
+    <item
+        android:drawable="@drawable/roll_point1"
+        android:duration="250"/>
+    <item
+        android:drawable="@drawable/roll_point2"
+        android:duration="250"/>
+    <item
+        android:drawable="@drawable/roll_point3"
+        android:duration="250"/>
+    <item
+        android:drawable="@drawable/roll_point4"
+        android:duration="250"/>
+
+</animation-list>

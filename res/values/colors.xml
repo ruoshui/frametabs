@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="weibosdk_transparent">#00000000</color>
+    <color name="weibosdk_text_num_gray">#ff333333</color>
+    <color name="weibosdk_dialog_title_blue">#ff9cccf7</color>
+    <color name="list_line">#ffadadad</color>
+    <color name="form_back">#ff999999</color>
+    <color name="form_title_btn_back">#ff8a8a8a</color>
+    <color name="title_back">#ffc2c2c2</color>
+    <color name="search_bk_color">#ffd4d4d4</color>
+    <color name="user_name">#ff2277b2</color>
+    <color name="b_font_color">#ff2277b2</color>
+    <color name="index_font_color">#ff333333</color>
+    <color name="index_font_count">#ff999999</color>
+    <color name="index_sys_top_count">#ffff7200</color>
+    <color name="yellow_border">#ffffa400</color>
+    <color name="white">#ffffffff</color>
+    <color name="regist_font">#ff333333</color>
+    <color name="photo_border1">#ff00ffff</color>
+    <color name="photo_border2">#ffff6666</color>
+    <color name="green">#ff4f7039</color>
+    <color name="red">#ffba141e</color>
+    <color name="black">#ff000000</color>
+    <color name="messageinfo">#ffdbe8ca</color>
+    <color name="grarp">#ff737373</color>
+    <color name="menucolor">#ffa1a1a1</color>
+    <color name="main_text_below_yellow">#ff4a2202</color>
+    <color name="general_grey_bg">#ffeeeded</color>
+    <color name="weather_city_greeen">#ff739346</color>
+    <color name="certificate_button_grey">#ff363737</color>
+    <color name="searchresult_button_orange">#ffff520f</color>
+    <color name="graw">#ff404040</color>
+    <color name="lightgreen">#ff549921</color>
+    <color name="darkgreen">#ff7ab948</color>
+    <color name="gray">#ffa0a0a0</color>
+    <color name="green2">#ff5ca024</color>
+    <color name="feedback_answer">#ff050902</color>
+    <color name="view_mask">#60000000</color>
+    <color name="trans">#00000000</color>
+    <color name="translucent_background">#99000000</color>
+    <color name="travel_check_in">#ffff520f</color>
+    <color name="travel_open_for_use">#ff52971f</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_frame">#ff000000</color>
+    <color name="viewfinder_laser">#ff00ff00</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="search_btn">#5fc6ef</color>
+    <color name="count_mil">#6bbc07</color>
+    <color name="count_time">#ec7322</color>
+    <color name="count_times">#2198d2</color>
+    <color name="count_oiles">#e6b405</color>
+    <color name="single_over_trip_first">#f36e13</color>
+    <color name="common_bg_color">#ffececec</color>
+    
+  <color name="white2">#ffffffff</color>
+  <color name="unfocused">#cccccccc</color>
+  <color name="pressed">#fff22fff</color>
+  <color name="selected">#fff33fff</color>
+  <color name="focused">#ffff44ff</color>
+<color name="background_color">#F555</color>
+<color name="marking_color">#AFFF</color>
+<color name="text_color">#AFFF</color>
+</resources>
