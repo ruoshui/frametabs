@@ -1,5 +1,7 @@
 package cn.wang.yin.ui;
 
+import android.app.FragmentManager.BackStackEntry;
+import android.app.FragmentManager.OnBackStackChangedListener;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,7 +33,8 @@ import cn.wang.yin.utils.PersonDbUtils;
  * @see http://developer.android.com/training/basics/fragments/index.html
  * @see http://developer.android.com/guide/components/fragments.html
  * */
-public class FragmentMain extends FragmentActivity {
+public class FragmentMain extends FragmentActivity implements OnBackStackChangedListener{
+	Fragment exprss;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,7 @@ public class FragmentMain extends FragmentActivity {
 			}
 		});
 		bottomBar.setSelectedState(0);
-
+		exprss = new FragmentExpress();
 		// bottomBar.hideIndicate();//这个代码原来控制红色小图标的可见性
 		// bottomBar.showIndicate(12);
 
@@ -62,12 +65,14 @@ public class FragmentMain extends FragmentActivity {
 	private void showDetails(int index) {
 		Fragment details = (Fragment) getSupportFragmentManager()
 				.findFragmentById(R.id.details);
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		//ft.beginTransaction();
 		switch (index) {
 		case 0:
 			details = new FragmentExecute();
 			break;
 		case 1:
-			details = new FragmentExpress();
+			details = exprss;
 			break;
 		case 2:
 			details = new FragmentSaveImage();
@@ -79,31 +84,41 @@ public class FragmentMain extends FragmentActivity {
 			details = new FragmentSetting();
 			break;
 		}
+		
 		// Execute a transaction, replacing any existing
 		// fragment with this one inside the frame.
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.replace(R.id.details, details);
+
+		 ft.replace(R.id.details, details);
+		//ft.attach(details);
+		//ft.addToBackStack(null);
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-		// ft.addToBackStack(null);//这行代码可以返回之前的操作（横屏的情况下，即两边都显示的情况下）
+		ft.addToBackStack(null);//这行代码可以返回之前的操作（横屏的情况下，即两边都显示的情况下）
 		ft.commit();
 	}
 
-	@Override
+/*	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			// super.onResume();
-			//super.onStop();
-
+			// super.onStop();
+			finish();
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_MENU) {
 
 		}
+
 		return super.onKeyDown(keyCode, event);
-	}
+	}*/
 
 	public static void launch(Context c) {
 		Intent intent = new Intent(c, FragmentMain.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		c.startActivity(intent);
 	}
+
+	@Override
+	public void onBackStackChanged() {
+		
+	}
+	
 }

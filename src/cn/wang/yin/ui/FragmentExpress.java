@@ -40,6 +40,8 @@ public class FragmentExpress extends Fragment {
 	public static final int SUCCESS = 101;
 	public static final int FAIL = 102;
 	List<String> all = new ArrayList();
+	
+	
 
 	public FragmentExpress() {
 
