@@ -27,6 +27,8 @@ public class LocationApplication extends Application {
 		mLocationClient = new LocationClient(getApplicationContext());
 		mLocationClient.registerLocationListener(myListener);
 		setLocationOption();
+		CrashHandler crashHandler = CrashHandler.getInstance();
+		crashHandler.init(getApplicationContext());
 		super.onCreate();
 	}
 

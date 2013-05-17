@@ -107,7 +107,7 @@ public class FragmentCompass extends Fragment {
 		application = LocationApplication.getInstance();
 		// setContentView(R.layout.main);
 
-		mViewGuide = getActivity().findViewById(R.id.view_guide);
+		mViewGuide = layout.findViewById(R.id.view_guide);
 		mViewGuide.setVisibility(View.VISIBLE);
 		invisiableHandler.sendMessageDelayed(new Message(), 3000);
 		mGuideAnimation = (ImageView) layout.findViewById(R.id.guide_animation);

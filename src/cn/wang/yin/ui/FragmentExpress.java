@@ -159,6 +159,9 @@ public class FragmentExpress extends Fragment {
 				e.printStackTrace();
 			}
 			try {
+				//查询快递类型的地址
+				//http://www.kuaidi100.com/autonumber/auto?num=5045205409800
+			
 				Express bean = remot.scanExpress(num);
 				Log.e("gddddd", "测试");
 				List<ExpressData> datas = bean.getData();

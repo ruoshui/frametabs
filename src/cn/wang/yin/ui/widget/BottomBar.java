@@ -87,28 +87,32 @@ public class BottomBar extends LinearLayout implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		int tag = (Integer) v.getTag();
-		switch (tag) {
-		case TAG_0:
-			setNormalState(lastButton);
-			setSelectedState(tag);
-			break;
-		case TAG_1:
-			setNormalState(lastButton);
-			setSelectedState(tag);
-			break;
-		case TAG_2:
-			setNormalState(lastButton);
-			setSelectedState(tag);
-			break;
-		case TAG_3:
-			setNormalState(lastButton);
-			setSelectedState(tag);
-			break;
-		case TAG_4:
-			setNormalState(lastButton);
-			setSelectedState(tag);
-			break;
-		}
+		
+		setNormalState(lastButton);
+		setSelectedState(tag);
+		
+//		switch (tag) {
+//		case TAG_0:
+//			setNormalState(lastButton);
+//			setSelectedState(tag);
+//			break;
+//		case TAG_1:
+//			setNormalState(lastButton);
+//			setSelectedState(tag);
+//			break;
+//		case TAG_2:
+//			setNormalState(lastButton);
+//			setSelectedState(tag);
+//			break;
+//		case TAG_3:
+//			setNormalState(lastButton);
+//			setSelectedState(tag);
+//			break;
+//		case TAG_4:
+//			setNormalState(lastButton);
+//			setSelectedState(tag);
+//			break;
+//		}
 	}
 
 	private int lastButton = -1;
