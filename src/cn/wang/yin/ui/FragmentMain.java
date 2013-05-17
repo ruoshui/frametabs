@@ -70,10 +70,10 @@ public class FragmentMain extends FragmentActivity {
 			details = new FragmentExpress();
 			break;
 		case 2:
-			details = new SaveImageFragment();
+			details = new FragmentSaveImage();
 			break;
 		case 3:
-			details = new FragmentSearch();
+			details = new FragmentCompass();
 			break;
 		case 4:
 			details = new FragmentSetting();
