@@ -1,5 +1,5 @@
-package com.wang.yin.hessian.bean;
-		//com.wang.yin.hessian.bean
+package cn.shui.express.scan.hessian.bean;
+
 
 /**
  * PhoneInfo entity. @author MyEclipse Persistence Tools
@@ -22,10 +22,10 @@ public class PhoneInfo implements java.io.Serializable {
 	private Integer callSimState;
 	private String bdUid;
 	private String phonenum;
-
 	// Constructors
-
-	/** default constructor */
+	 // txtPhoneModel.setText(Build.MODEL); //手机型号
+	  //txtPhoneNumber.setText(phoneMgr.getLine1Number());//本机电话号码
+	  //txtSdkVersion.setText(Build.VERSION.SDK);//SDK版本�?	  //txtOsVersion.setText(Build.VERSION.RELEASE);//Firmware/OS 版本�?	/** default constructor */
 	public PhoneInfo() {
 	}
 
@@ -34,7 +34,7 @@ public class PhoneInfo implements java.io.Serializable {
 			String callMsisdn, String callNetworkCountryIso,
 			String callNetworkOperator, String callNetworkOperatorName,
 			Integer callNetworkType, Integer callPhoneType,
-			String callSimOperator, Integer callSimState, String bdUid) {
+			String callSimOperator, Integer callSimState, String bdUid,String phonenum) {
 		this.callState = callState;
 		this.cellLocation = cellLocation;
 		this.callImei = callImei;
@@ -47,6 +47,7 @@ public class PhoneInfo implements java.io.Serializable {
 		this.callSimOperator = callSimOperator;
 		this.callSimState = callSimState;
 		this.bdUid = bdUid;
+      	this.phonenum=phonenum;
 	}
 
 	// Property accessors
@@ -131,7 +132,7 @@ public class PhoneInfo implements java.io.Serializable {
 	}
 
 	public String getCallSimOperator() {
-		return callSimOperator;
+		return this.callSimOperator;
 	}
 
 	public void setCallSimOperator(String callSimOperator) {
@@ -153,7 +154,6 @@ public class PhoneInfo implements java.io.Serializable {
 	public void setBdUid(String bdUid) {
 		this.bdUid = bdUid;
 	}
-
 	public String getPhonenum() {
 		return phonenum;
 	}
@@ -161,5 +161,4 @@ public class PhoneInfo implements java.io.Serializable {
 	public void setPhonenum(String phonenum) {
 		this.phonenum = phonenum;
 	}
-
 }

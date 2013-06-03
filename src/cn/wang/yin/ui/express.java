@@ -21,14 +21,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import cn.shui.express.scan.hessian.bean.Express;
+import cn.shui.express.scan.hessian.bean.ExpressData;
 import cn.wang.yin.hessian.api.Remot;
 import cn.wang.yin.personal.R;
 import cn.wang.yin.utils.PersonConstant;
 import cn.wang.yin.utils.RemoteFactoryUtils;
 
 import com.caucho.hessian.client.HessianProxyFactory;
-import com.wang.yin.hessian.bean.Express;
-import com.wang.yin.hessian.bean.ExpressData;
 
 public class express extends Activity {
 	EditText editText1;
@@ -143,8 +143,8 @@ public class express extends Activity {
 			try {
 				Express bean = remot.scanExpress(num);
 				Log.e("gddddd", "≤‚ ‘");
-				List<ExpressData> datas = bean.getData();
-				msg.obj = datas;
+				//List<ExpressData> datas = bean.getData();
+				//msg.obj = datas;
 			} catch (Exception e) {
 				msg.what = FAIL;
 				e.printStackTrace();

@@ -1,4 +1,4 @@
-package com.wang.yin.hessian.bean;
+package cn.shui.express.scan.hessian.bean;
 
 import java.util.Date;
 

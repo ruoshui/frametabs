@@ -2,6 +2,7 @@ package cn.wang.yin.ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -22,14 +23,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import cn.shui.express.scan.hessian.bean.Express;
+import cn.shui.express.scan.hessian.bean.ExpressData;
 import cn.wang.yin.hessian.api.Remot;
 import cn.wang.yin.personal.R;
 import cn.wang.yin.utils.PersonConstant;
 import cn.wang.yin.utils.RemoteFactoryUtils;
 
 import com.caucho.hessian.client.HessianProxyFactory;
-import com.wang.yin.hessian.bean.Express;
-import com.wang.yin.hessian.bean.ExpressData;
 
 public class FragmentExpress extends Fragment {
 	EditText editText1;
@@ -84,7 +85,7 @@ public class FragmentExpress extends Fragment {
 		return layout;
 	}
 
-	public void fresh(List<ExpressData> datas) {
+	public void fresh(Set<ExpressData> datas) {
 		LayoutInflater inflater = (LayoutInflater) getActivity()
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		express_list.removeAllViews();
@@ -116,7 +117,7 @@ public class FragmentExpress extends Fragment {
 			switch (msg.what) {
 			case SUCCESS: {
 				if (msg.obj != null) {
-					List<ExpressData> datas = (List<ExpressData>) msg.obj;
+					Set<ExpressData> datas = (Set<ExpressData>) msg.obj;
 					fresh(datas);
 				}
 			}
@@ -166,7 +167,7 @@ public class FragmentExpress extends Fragment {
 			
 				Express bean = remot.scanExpress(num);
 				Log.e("gddddd", "≤‚ ‘");
-				List<ExpressData> datas = bean.getData();
+				Set<ExpressData> datas = bean.getExpressDatas();
 				msg.obj = datas;
 			} catch (Exception e) {
 				msg.what = FAIL;

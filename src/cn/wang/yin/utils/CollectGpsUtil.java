@@ -13,10 +13,10 @@ import android.net.NetworkInfo;
 import android.os.Message;
 import android.util.Log;
 
+import cn.shui.express.scan.hessian.bean.GpsInfo;
 import cn.wang.yin.hessian.api.Remot;
 
 import com.baidu.location.BDLocation;
-import com.wang.yin.hessian.bean.GpsInfo;
 
 public class CollectGpsUtil implements Serializable {
 

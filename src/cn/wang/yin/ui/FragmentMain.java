@@ -35,7 +35,8 @@ import cn.wang.yin.utils.PersonDbUtils;
  * */
 public class FragmentMain extends FragmentActivity implements OnBackStackChangedListener{
 	Fragment exprss;
-
+	Fragment SaveImage;
+	Fragment Compass;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		if (!PersonDbUtils.getValue(PersonConstant.USER_FIRST_OPEN, false)) {

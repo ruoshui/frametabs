@@ -1,2 +1,11 @@
 eclipse.preferences.version=1
+encoding//src/cn/shui/express/scan/hessian/bean=UTF-8
+encoding//src/cn/shui/express/scan/hessian/bean/Express.java=UTF-8
+encoding//src/cn/wang/yin/hessian/api/Remot.java=UTF-8
+encoding//src/cn/wang/yin/personal/service/HandlerService.java=UTF-8
+encoding//src/cn/wang/yin/ui=GBK
+encoding//src/cn/wang/yin/ui/Base.java=UTF-8
+encoding//src/cn/wang/yin/ui/FragmentExpress.java=GBK
+encoding//src/cn/wang/yin/ui/LocationApplication.java=UTF-8
 encoding//src/com/wang/yin/hessian/bean=UTF-8
+encoding/src=GBK

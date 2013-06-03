@@ -6,7 +6,7 @@ import android.content.SharedPreferences.Editor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Message;
 import android.telephony.TelephonyManager;
-import com.wang.yin.hessian.bean.PhoneInfo;
+import cn.shui.express.scan.hessian.bean.PhoneInfo;
 
 public class PersonDbUtils {
 	private static PersonDbAdapter personDb;

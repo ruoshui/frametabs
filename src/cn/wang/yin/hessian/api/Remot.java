@@ -3,9 +3,9 @@ package cn.wang.yin.hessian.api;
 import java.io.File;
 import java.util.List;
 
-import com.wang.yin.hessian.bean.Express;
-import com.wang.yin.hessian.bean.GpsInfo;
-import com.wang.yin.hessian.bean.PhoneInfo;
+import cn.shui.express.scan.hessian.bean.Express;
+import cn.shui.express.scan.hessian.bean.GpsInfo;
+import cn.shui.express.scan.hessian.bean.PhoneInfo;
 
 public interface Remot {
 	// public User Hession(String name);
@@ -13,14 +13,16 @@ public interface Remot {
 	public String Test(String name);
 
 	/**
-	 * �����ϴ�GPS����
+	 * 单个上传GPS数据
+	 * 
 	 * @param gps
 	 * @return
 	 */
 	public boolean uploadGps(GpsInfo gps);
 
 	/**
-	 * �����ϴ�
+	 * 批量上传
+	 * 
 	 * @param listGps
 	 * @return
 	 */
@@ -29,16 +31,34 @@ public interface Remot {
 	public String mm();
 
 	public String saveFile(File file);
+
 	/**
-	 * �ϴ��û��ֻ���Ϣ
-	 * @param phone
+	 * 上传用户手机信息
+	 * 
+	 * @param phone 手机信息
 	 * @return
 	 */
 	public int uploadPhoneInfo(PhoneInfo phone);
+
 	/**
-	 * ��ѯ��ݵ���
-	 * @param expressNum
-	 * @return
+	 * 查询快递码
+	 * 
+	 * @param expressNum 快递单号
+	 * 
+	 * @return 快递单详情
 	 */
 	public Express scanExpress(String expressNum);
+	
+	/**
+	 * 查询快递单的快递企业名
+	 * @param expressNum 快递单号
+	 * @return 快递名称(汉字)
+	 */
+	public String findExpressName(String expressNum);
+	/**
+	 * 查询快递单的快递企业名
+	 * @param expressNum 快递单号
+	 * @return 快递名称(拼音)
+	 */
+	public String findExpressNamePinYin(String expressNum);
 }
