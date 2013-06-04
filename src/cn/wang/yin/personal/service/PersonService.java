@@ -29,19 +29,19 @@ public class PersonService extends IntentService {
 
 	@Override
 	public void onCreate() {
-		mLocationClient = new LocationClient(getApplicationContext()); // 声明LocationClient类
-		mLocationClient.registerLocationListener(myListener); // 注册监听函数
-		LocationClientOption option = new LocationClientOption();
-		option.setOpenGps(true);
-		option.setAddrType("all");// 返回的定位结果包含地址信息
-		option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度,默认值gcj02
-		option.setScanSpan((int) PersonConstant.WAIT_TIMS);// 设置发起定位请求的间隔时间为5000ms
-		option.disableCache(true);// 禁止启用缓存定位
+//		mLocationClient = new LocationClient(getApplicationContext()); // 声明LocationClient类
+//		mLocationClient.registerLocationListener(myListener); // 注册监听函数
+//		LocationClientOption option = new LocationClientOption();
+//		option.setOpenGps(true);
+//		option.setAddrType("all");// 返回的定位结果包含地址信息
+//		option.setCoorType("bd09ll");// 返回的定位结果是百度经纬度,默认值gcj02
+//		option.setScanSpan((int) PersonConstant.WAIT_TIMS);// 设置发起定位请求的间隔时间为5000ms
+//		option.disableCache(true);// 禁止启用缓存定位
 		// option.setPoiNumber(5); // 最多返回POI个数
 		// option.setPoiDistance(1000); // poi查询距离
 		// option.setPoiExtraInfo(true); // 是否需要POI的电话和地址等详细信息
-		mLocationClient.setLocOption(option);
-		mLocationClient.start();
+//		mLocationClient.setLocOption(option);
+//		mLocationClient.start();
 		super.onCreate();
 
 	}
@@ -56,27 +56,27 @@ public class PersonService extends IntentService {
 
 		// TODO Auto-generated method stub
 		// location();
-		final Timer timer = new Timer();
-		final TimerTask task;
-		final Handler handler = new Handler() {
-
-			@Override
-			public void handleMessage(Message msg) {
-				CollectGpsUtil.uploadGps();
-				super.handleMessage(msg);
-			}
-		};
-		task = new TimerTask() {
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				Message message = new Message();
-				message.what = 1;
-				handler.sendMessage(message);
-			}
-		};
-		timer.schedule(task, PersonConstant.WAIT_TIMS * 5,
-				PersonConstant.WAIT_TIMS * 5);
+//		final Timer timer = new Timer();
+//		final TimerTask task;
+//		final Handler handler = new Handler() {
+//
+//			@Override
+//			public void handleMessage(Message msg) {
+//				CollectGpsUtil.uploadGps();
+//				super.handleMessage(msg);
+//			}
+//		};
+//		task = new TimerTask() {
+//			@Override
+//			public void run() {
+//				// TODO Auto-generated method stub
+//				Message message = new Message();
+//				message.what = 1;
+//				handler.sendMessage(message);
+//			}
+//		};
+//		timer.schedule(task, PersonConstant.WAIT_TIMS * 5,
+//				PersonConstant.WAIT_TIMS * 5);
 		super.onStart(intent, startId);
 	}
 

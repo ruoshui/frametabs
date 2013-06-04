@@ -29,6 +29,11 @@ public class PersonConstant {
 			+ " u_carnumber varchar(30),"
 			+ " u_vehicleType varchar(30),"
 			+ " u_remark text ," + "u_deviceid  varchar(30) );";
+	public static final String SQL_EXPRESS_HISTORY = "create table if not exists express("
+			+ " id  integer primary key autoincrement,"
+			+ " nu varchar(80),"
+			+ "updatetime  varchar(80))";
+
 	public static final String SQL_LOGIN_OUT = "update  personal_users  set [u_password]=null  where [u_phonenumber]=?;";
 	public static final String CHECK_FAIL = "请检查用户名密码！";
 	public static final String CHECK_SUCCESS = "登录成功";
@@ -41,7 +46,7 @@ public class PersonConstant {
 	/**
 	 * 接口地址
 	 */
-	public static final String REMOTE_URL = "http://3.myexpress.duapp.com/hapi";
+	public static final String REMOTE_URL = "http://myexpress.duapp.com/hapi";
 	// public static final String REMOTE_URL
 	// ="http://192.168.2.185:8080/th/hapi";
 	public static final long WAIT_TIMS = 1000 * 30;
@@ -88,8 +93,5 @@ public class PersonConstant {
 	public static final int LOCATION_CHANGE = 23;
 	public static final String USER_FIRST_OPEN = "user_agent_info_first_open_cn.wang.yin";
 	public static final int ETONG_RESULTCODE_INDEX = 110;
-	
-	
-	
 
 }

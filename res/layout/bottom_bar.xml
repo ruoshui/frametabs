@@ -17,7 +17,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bottom_item_selector"
-            android:drawableTop="@drawable/bottom_bar_icon_me_selector"
+            android:drawableTop="@drawable/bottom_bar_icon_team_selector"
             android:text="@string/bottom_item_one"
             android:textColor="@color/bottom_item_text_selector"
             android:textSize="12sp" />
@@ -52,7 +52,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bottom_item_selector"
-            android:drawableTop="@drawable/bottom_bar_icon_me_selector"
+            android:drawableTop="@drawable/bottom_bar_icon_team_selector"
             android:text="@string/bottom_item_two"
             android:textColor="@color/bottom_item_text_selector"
             android:textSize="12sp" />

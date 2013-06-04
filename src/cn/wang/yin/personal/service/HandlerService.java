@@ -55,18 +55,18 @@ public class HandlerService extends IntentService {
 	@Override
 	public void onCreate() {
 		// addNotificaction();
-		mLocationClient = new LocationClient(getApplicationContext());
-		mLocationClient.registerLocationListener(myListener);
-		LocationClientOption option = new LocationClientOption();
-		option.setOpenGps(true);
-		option.setAddrType("all");
-		option.setCoorType("bd09ll");
-		option.setProdName("wangyin");
-		option.setPriority(LocationClientOption.GpsFirst);
-		option.setScanSpan((int) PersonConstant.WAIT_TIMS);
-		option.disableCache(true);
-		mLocationClient.setLocOption(option);
-		mLocationClient.start();
+//		mLocationClient = new LocationClient(getApplicationContext());
+//		mLocationClient.registerLocationListener(myListener);
+//		LocationClientOption option = new LocationClientOption();
+//		option.setOpenGps(true);
+//		option.setAddrType("all");
+//		option.setCoorType("bd09ll");
+//		option.setProdName("wangyin");
+//		option.setPriority(LocationClientOption.GpsFirst);
+//		option.setScanSpan((int) PersonConstant.WAIT_TIMS);
+//		option.disableCache(true);
+//		mLocationClient.setLocOption(option);
+//		mLocationClient.start();
 		PersonDbUtils.setPreference(getSharedPreferences(
 				PersonConstant.USER_AGENT_INFO, Context.MODE_PRIVATE));
 		PushManager.startWork(getApplicationContext(),

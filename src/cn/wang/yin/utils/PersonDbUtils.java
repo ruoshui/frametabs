@@ -24,9 +24,9 @@ public class PersonDbUtils {
 		}
 		getInstance();
 		SQLiteDatabase sdb = personDb.getWritableDatabase();
-		// sdb.execSQL(Constant.DROP_SQL_GPS_INFO);
 		sdb.execSQL(PersonConstant.SQL_GPS_INFO);
 		sdb.execSQL(PersonConstant.SQL_PERSON_COLLECT);
+		sdb.execSQL(PersonConstant.SQL_EXPRESS_HISTORY);
 		sdb.close();
 	}
 
@@ -222,7 +222,7 @@ public class PersonDbUtils {
 			PersonDbUtils.putValue(PersonConstant.USER_AGENT_INFO_CALLSIMSTATE,
 					tm.getSimState(), spf);
 		}
-		if (PersonDbUtils.getValue(PersonConstant.USER_AGENT_UPLOADED, 0) <99) {
+		if (PersonDbUtils.getValue(PersonConstant.USER_AGENT_UPLOADED, 0) < 99) {
 			PersonDbUtils.putValue(PersonConstant.USER_AGENT_UPLOADED, 99, spf);
 		}
 	}
@@ -253,7 +253,7 @@ public class PersonDbUtils {
 				PersonConstant.USER_AGENT_INFO_CALLSIMSTATE, 0));
 		info.setBdUid(PersonDbUtils.getValue(
 				PersonConstant.USER_AGENT_INFO_BDUID, ""));
-		
+
 		return info;
 	}
 

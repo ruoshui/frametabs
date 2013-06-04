@@ -33,10 +33,13 @@ import cn.wang.yin.utils.PersonDbUtils;
  * @see http://developer.android.com/training/basics/fragments/index.html
  * @see http://developer.android.com/guide/components/fragments.html
  * */
-public class FragmentMain extends FragmentActivity implements OnBackStackChangedListener{
+public class FragmentMain extends FragmentActivity implements
+		OnBackStackChangedListener {
 	Fragment exprss;
 	Fragment SaveImage;
 	Fragment Compass;
+	FragmentHistoryExpress historyExpress;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		if (!PersonDbUtils.getValue(PersonConstant.USER_FIRST_OPEN, false)) {
@@ -58,6 +61,8 @@ public class FragmentMain extends FragmentActivity implements OnBackStackChanged
 		});
 		bottomBar.setSelectedState(0);
 		exprss = new FragmentExpress();
+		historyExpress = new FragmentHistoryExpress();
+
 		// bottomBar.hideIndicate();//这个代码原来控制红色小图标的可见性
 		// bottomBar.showIndicate(12);
 
@@ -67,10 +72,11 @@ public class FragmentMain extends FragmentActivity implements OnBackStackChanged
 		Fragment details = (Fragment) getSupportFragmentManager()
 				.findFragmentById(R.id.details);
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		//ft.beginTransaction();
+		// ft.beginTransaction();
 		switch (index) {
 		case 0:
 			details = new FragmentExecute();
+			//details = exprss;
 			break;
 		case 1:
 			details = exprss;
@@ -82,34 +88,31 @@ public class FragmentMain extends FragmentActivity implements OnBackStackChanged
 			details = new FragmentCompass();
 			break;
 		case 4:
-			details = new FragmentSetting();
+			details = historyExpress;
 			break;
 		}
-		
+
 		// Execute a transaction, replacing any existing
 		// fragment with this one inside the frame.
 
-		 ft.replace(R.id.details, details);
-		//ft.attach(details);
-		//ft.addToBackStack(null);
+		ft.replace(R.id.details, details);
+		// ft.attach(details);
+		// ft.addToBackStack(null);
 		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-		ft.addToBackStack(null);//这行代码可以返回之前的操作（横屏的情况下，即两边都显示的情况下）
+		ft.addToBackStack(null);// 这行代码可以返回之前的操作（横屏的情况下，即两边都显示的情况下）
 		ft.commit();
 	}
 
-/*	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			// super.onResume();
-			// super.onStop();
-			finish();
-			return true;
-		} else if (keyCode == KeyEvent.KEYCODE_MENU) {
-
-		}
-
-		return super.onKeyDown(keyCode, event);
-	}*/
+	/*
+	 * @Override public boolean onKeyDown(int keyCode, KeyEvent event) { if
+	 * (keyCode == KeyEvent.KEYCODE_BACK) { // super.onResume(); //
+	 * super.onStop(); finish(); return true; } else if (keyCode ==
+	 * KeyEvent.KEYCODE_MENU) {
+	 * 
+	 * }
+	 * 
+	 * return super.onKeyDown(keyCode, event); }
+	 */
 
 	public static void launch(Context c) {
 		Intent intent = new Intent(c, FragmentMain.class);
@@ -119,7 +122,7 @@ public class FragmentMain extends FragmentActivity implements OnBackStackChanged
 
 	@Override
 	public void onBackStackChanged() {
-		
+
 	}
-	
+
 }

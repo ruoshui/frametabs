@@ -2,6 +2,7 @@ package cn.wang.yin.ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -13,7 +14,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +25,9 @@ import cn.shui.express.scan.hessian.bean.Express;
 import cn.shui.express.scan.hessian.bean.ExpressData;
 import cn.wang.yin.hessian.api.Remot;
 import cn.wang.yin.personal.R;
+import cn.wang.yin.personal.user.data.UserData;
 import cn.wang.yin.utils.PersonConstant;
+import cn.wang.yin.utils.PersonStringUtils;
 import cn.wang.yin.utils.RemoteFactoryUtils;
 
 import com.caucho.hessian.client.HessianProxyFactory;
@@ -45,11 +47,13 @@ public class express extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.express);
 		editText1 = (EditText) findViewById(R.id.editText1);
-		editText1.setText("5045205409800");
+		// editText1.setText("5045205409800");
+
+		;
 		button1 = (Button) findViewById(R.id.button1);
 		express_list = (LinearLayout) findViewById(R.id.express_list);
-		
-		p_dialog=new ProgressDialog(getApplicationContext());
+
+		p_dialog = new ProgressDialog(getApplicationContext());
 		p_dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		p_dialog.setMessage("载入中……");
 		p_dialog.setTitle("请等待");
@@ -59,17 +63,24 @@ public class express extends Activity {
 				String express_num = editText1.getText().toString();
 				if (StringUtils.isNotBlank(express_num)) {
 					num = express_num;
-					//p_dialog.show();
-					//p_dialog =ProgressDialog.show(express.this, "teee", "载入中……",true);
+					// p_dialog.show();
+					// p_dialog =ProgressDialog.show(express.this, "teee",
+					// "载入中……",true);
 					Thread t = new Thread(submitRunnnable);
 					t.run();
-					
+
 				}
 			}
 		});
+		if (UserData.getExpress() != null) {
+			editText1.setText(UserData.getExpress().getNu());
+			num = UserData.getExpress().getNu();
+			Thread t = new Thread(submitRunnnable);
+			t.run();
+		}
 	}
 
-	public void fresh(List<ExpressData> datas) {
+	public void fresh(Set<ExpressData> datas) {
 
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -80,7 +91,8 @@ public class express extends Activity {
 			ImageView imageView1 = (ImageView) child
 					.findViewById(R.id.imageView1);
 			TextView textView2 = (TextView) child.findViewById(R.id.textView2);
-			textView1.setText("" + bean.getFtime());
+			textView1.setText(""
+					+ PersonStringUtils.pareDateToString(bean.getFtime()));
 			textView2.setText("" + bean.getContext());
 			express_list.addView(child);
 		}
@@ -96,7 +108,7 @@ public class express extends Activity {
 			switch (msg.what) {
 			case SUCCESS: {
 				if (msg.obj != null) {
-					List<ExpressData> datas = (List<ExpressData>) msg.obj;
+					Set<ExpressData> datas = (Set<ExpressData>) msg.obj;
 					fresh(datas);
 				}
 			}
@@ -142,18 +154,17 @@ public class express extends Activity {
 			}
 			try {
 				Express bean = remot.scanExpress(num);
-				Log.e("gddddd", "测试");
-				//List<ExpressData> datas = bean.getData();
-				//msg.obj = datas;
+				Set<ExpressData> datas = bean.getExpressDatas();
+				msg.obj = datas;
 			} catch (Exception e) {
 				msg.what = FAIL;
 				e.printStackTrace();
 			}
 			hand.sendMessage(msg);
 		}
-		
+
 	};
-	
+
 	Runnable scanrunnable = new Runnable() {
 		@Override
 		public void run() {
