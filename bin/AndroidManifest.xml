@@ -20,9 +20,11 @@
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <!-- android:name="cn.wang.yin.utils.PersonIntence" -->
+    <!--
+      android:name="cn.wang.yin.utils.PersonIntence" 
+      android:name="cn.wang.yin.ui.LocationApplication"
+    -->
     <application
-        android:name="cn.wang.yin.ui.LocationApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -40,7 +42,8 @@
         <activity
             android:name="cn.wang.yin.ui.express"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged" >
         </activity>
         <activity
             android:name="cn.wang.yin.ui.CompassActivity"
@@ -60,7 +63,8 @@
         </activity>
         <activity
             android:name="cn.wang.yin.ui.FragmentMain"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateUnchanged" >
         </activity>
         <activity
             android:name="cn.wang.yin.ui.SplashScreenActivity"

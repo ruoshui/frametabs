@@ -48,13 +48,11 @@ public class express extends Activity {
 		setContentView(R.layout.express);
 		editText1 = (EditText) findViewById(R.id.editText1);
 		// editText1.setText("5045205409800");
-
-		;
 		button1 = (Button) findViewById(R.id.button1);
 		express_list = (LinearLayout) findViewById(R.id.express_list);
 
-		p_dialog = new ProgressDialog(getApplicationContext());
-		p_dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		p_dialog = new ProgressDialog(this);
+		p_dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		p_dialog.setMessage("载入中……");
 		p_dialog.setTitle("请等待");
 		button1.setOnClickListener(new View.OnClickListener() {
@@ -63,21 +61,15 @@ public class express extends Activity {
 				String express_num = editText1.getText().toString();
 				if (StringUtils.isNotBlank(express_num)) {
 					num = express_num;
-					// p_dialog.show();
+					p_dialog.show();
 					// p_dialog =ProgressDialog.show(express.this, "teee",
 					// "载入中……",true);
-					Thread t = new Thread(submitRunnnable);
-					t.run();
+					new Thread(submitRunnnable).start();
 
 				}
 			}
 		});
-		if (UserData.getExpress() != null) {
-			editText1.setText(UserData.getExpress().getNu());
-			num = UserData.getExpress().getNu();
-			Thread t = new Thread(submitRunnnable);
-			t.run();
-		}
+
 	}
 
 	public void fresh(Set<ExpressData> datas) {
@@ -170,5 +162,23 @@ public class express extends Activity {
 		public void run() {
 		}
 	};
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (p_dialog == null) {
+			p_dialog = new ProgressDialog(this);
+			p_dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			p_dialog.setMessage("载入中……");
+			p_dialog.setTitle("请等待");
+		}
+		if (UserData.getExpress() != null) {
+			editText1.setText(UserData.getExpress().getNu());
+			num = UserData.getExpress().getNu();
+			p_dialog.show();
+			new Thread(submitRunnnable).start();
+		}
+	}
 
 }
